@@ -1,0 +1,29 @@
+bem vindo ao caos em pessoa.
+
+pqp eu n sei mais o q ta acontecendo aq, mas tem mt coisa kkkkkkk
+
+de forma geral, to refazendo as paginas que o rosa tinha feito, elas tao
+quebradas, mas tudo bem desde q eu consiga mandar alguma coisa.
+
+em public nos temos as imgs q usamos ao longo da aplicacao
+
+em src temos nossos componentes, contextos e paginas
+as paginas eu tirei do proprio rosa(ou tentei) e o nome das pastas eh referente
+ao path que uso no navigate.
+
+toda a estilizacao delas estao ligada ao index.css(n sei se foi por isso q quebrou :p)
+mas qnd o rosa fez so tinha um arquivo css ent pensei q daria certo kk
+
+o src/App.css n tem nada msm, n se assuste kkkkkk
+
+nos componentes era certo ter coisas alem da navbar, mas com todo respeito, da tempo n kkkkkk
+
+o context(contexto) serve para setar o timer que vai da pag principal para a 
+pagina timer. nao sei explicar a logica q ta ali mais nao
+
+talvez no momento q vc estiver lendo isso eu terei um arquivo onde tera uma
+referencia do axios, e meio q ele eh o centro das requisicoes. os gets, posts e 
+deletes vao passar por ele pra ficar mais centralizado.
+
+se n tiver, bem, eu churrasquei dps de trabalhar nisso pelas ultimas 16h e perder
+o dia das maes ;-;

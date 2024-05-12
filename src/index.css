@@ -1,0 +1,332 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans", sans-serif;
+}
+
+html {
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(247, 247, 247);
+}
+
+header {
+    width: 100%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background-color: white;
+    margin-bottom: 7.5%;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+main {
+    background-color: white;
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    padding: 10px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 50px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 35px;
+}
+
+label {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+input {
+    background-color: #EFEFEF;
+    padding: 10px;
+    border-radius: 10px;
+    border: 0;
+    font-size: 20px;
+}
+
+input:focus {
+    outline: 0;
+}
+
+#modal {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.281);
+    width: 100%;
+    height: 110%;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal main {
+    background-color: white;
+    width: 30%;
+    padding: 20px 20px 0 20px;
+    border-radius: 20px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+#modal main h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 45px;
+}
+
+.format-modal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 10px 0 10px 0;
+}
+
+.text {
+    text-align: center;
+    font-size: 30px;
+}
+
+.align-buttons {
+    display: flex;
+    justify-content: end;
+}
+
+.align-buttons button {
+    width: 10em;
+    font-weight: 500;
+    border: 1px solid rgb(180, 180, 180);
+    border-radius: 10px;
+    font-size: 15px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.align-buttons button:hover {
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+.align-buttons .send-button {
+    color: white;
+    background-color: #007bc0;
+}
+
+.align-buttons .send-button:hover {
+    background-color: #00629a;
+}
+
+.return_button {
+    border: 0;
+    background-color: transparent;
+    width: 3em;
+    margin-right: 10px;
+}
+
+.return_button:hover {
+    cursor: pointer;
+}
+
+.return_button img {
+    width: 100%;
+}
+
+.values-header {
+    margin-bottom: 3%;
+}
+
+.values-main {
+    width: 100%;
+}
+
+.test1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.test2 {
+    display: flex;
+    flex-direction: column;
+}
+
+#change {
+    display: none;
+}
+
+.default-button {
+    width: 100%;
+    height: 4em;
+    font-weight: 500;
+    border: 1px solid rgb(180, 180, 180);
+    border-radius: 20px;
+    font-size: 25px;
+    margin-top: 20px;
+}
+
+.default-button:hover {
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+.nav-button {
+    background-color: white;
+    border: 0;
+    font-weight: 500;
+    font-size: 15px;
+    position: relative;
+    cursor: pointer;
+}
+
+.nav-button::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    border-radius: 4px;
+    background-color: #18272F;
+    bottom: 0;
+    left: 0;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .3s ease-in-out;
+}
+
+.nav-button:hover::before {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.error {
+    display: none;
+    background-color: rgb(255, 175, 175);
+    margin-top: 10px;
+    border: 1px solid red;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.nav-colors {
+    width: 100%;
+    height: 10px;
+    object-fit: cover;
+    object-position: 0 0 -90% 0;
+    display: block;
+}
+
+.logo {
+    height: 2em;
+}
+
+.define_time {
+    display: flex;
+    flex-direction: column;
+}
+
+.timer {
+    font-size: 200px;
+}
+
+@media screen and (max-width: 1280px) {
+    main {
+        width: 80%;
+    }
+
+    #modal main {
+        width: 80%;
+    }
+    
+    .values-header {
+        margin-bottom: 10%;
+    }
+
+    .values-main {
+        width: 80%;
+    }
+
+    .timer {
+        font-size: 150px;
+    }
+    
+}
+
+@media screen and (max-width: 460px) {
+    html {
+        overflow: auto;
+    }
+
+    main {
+        background-color: transparent;
+        box-shadow: none;
+        width: 90%;
+    }
+
+    #modal main {
+        width: 90%;
+    }
+
+    #modal main h1 {
+        font-size: 25px;
+    }
+
+    #modal main h2 {
+        font-size: 20px;
+    }
+
+    .text {
+        font-size: 20px;
+    }
+
+    .values-main {
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 35px;
+    }
+    
+    label {
+        font-size: 20px;
+    }
+    
+    input {
+        font-size: 15px;
+    }
+
+    .error {
+        font-size: 15px;
+    }
+
+    button {
+        font-size: 20px;
+    }
+
+    .timer {
+        font-size: 75px;
+    }
+}
