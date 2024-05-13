@@ -30,7 +30,7 @@ function NavbarComponent() {
     // Define named styles
     const headerStyle = {
       font: { bold: true, color: "FFFFFF" },
-      fill: { type: "pattern", pattern: "solid", fgColor: { argb: "FFA500" } },
+      fill: { type: "pattern", pattern: "solid", fgColor: { argb: "0099CCFF" } },
       alignment: { horizontal: "center", vertical: "middle" },
       border: {
         top: { style: "thin", color: { argb: "FF000000" } },
@@ -121,7 +121,7 @@ function NavbarComponent() {
         cell.style = headerStyle;
       });
 
-      worksheet2
+    worksheet2
       .addRow([
         "Nome",
         "Data de nascimento",
@@ -139,7 +139,6 @@ function NavbarComponent() {
       const rowData1 = [
         player.nome,
         player.nascimento,
-        player.prova1.respostas.join(", "),
         player.prova1.tempo,
         player.prova1.quantidade,
         player.prova1.tentativas,
@@ -148,17 +147,50 @@ function NavbarComponent() {
       const rowData2 = [
         player.nome,
         player.nascimento,
-        player.prova2.respostas.join(", "),
         player.prova2.tempo,
         player.prova2.quantidade,
         player.prova2.tentativas,
         player.prova2.acertos,
       ];
-      worksheet1.addRow(rowData1).eachCell((cell) => {
-        cell.style = defaultStyle;
-      });
-      worksheet2.addRow(rowData2).eachCell((cell) => {
-        cell.style = defaultStyle;
+
+      const rowData = [rowData1, rowData2];
+      const today = getTodayInfo();
+      const date = today.date;
+      const period = today.period;
+
+      rowData.forEach((row, index) => {
+        const currentWorksheet = index === 0 ? worksheet1 : worksheet2;
+        const answerRow = currentWorksheet.rowCount + 1;
+        row.forEach((cellData, cellIndex) => {
+          currentWorksheet.addRow([cellData]);
+          const currentCell = currentWorksheet.getCell(answerRow, cellIndex + 1);
+          if (index === 0) {
+            currentCell.style = headerStyle;
+          } else {
+            currentCell.style = defaultStyle;
+          }
+          if (cellIndex >= 2 && cellIndex <= 5) {
+            currentCell.style.alignment = { horizontal: 'center' };
+          }
+        });
+
+        // Merge cells
+        const mergeColumns = [1, 2, 8, 9, 10];
+        mergeColumns.forEach((column) => {
+          currentWorksheet.mergeCells(answerRow, column, answerRow + 1, column);
+        });
+
+        // Format correct and incorrect answers
+        const answersLength = player[`prova${index + 1}`].respostas.length;
+        let currentColumn = 3;
+        for (let i = 0; i < answersLength; i++) {
+          const currentCellStyle = player[`prova${index + 1}`].corretas[i] ? correctStyle : wrongStyle;
+          const currentRow = answerRow + i % 2;
+          const currentAnswer = i % 2 === 0 ? player[`prova${index + 1}`].corretas[i] : player[`prova${index + 1}`].respostas[i];
+          currentWorksheet.getCell(currentRow, currentColumn).fill = currentCellStyle.fill;
+          currentWorksheet.getCell(currentRow, currentColumn).value = currentAnswer;
+          currentColumn++;
+        }
       });
     });
 
@@ -195,11 +227,11 @@ function NavbarComponent() {
             </button>
           }
           {
-            window.location.pathname == '/' ? 
-              <Link to="/change_values" className="nav-button">Trocar valores</Link> : 
+            window.location.pathname == '/' ?
+              <Link to="/change_values" className="nav-button">Trocar valores</Link> :
               <Link to="/" className="nav-button">Início</Link>
           }
-        </div>  
+        </div>
       </nav>
     </header>
   );
