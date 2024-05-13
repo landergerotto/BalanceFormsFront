@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import NavbarComponent from '../../components/NavbarComponent/NavbarComponent';
-
 import ApiService from "../../services/requester/ApiService";
-
 
 const defaultValues = [
     1000, 750, 500, 200, 100,
@@ -10,9 +8,9 @@ const defaultValues = [
 ];
 
 function ValuesPage() {
-    const [modalOpen, setModalOpen] = React.useState(false);
-    const [values, setValues] = React.useState(Array(10).fill(''));
-    const [formIndex, setFormIndex] = React.useState(1);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [values, setValues] = useState(Array(10).fill(''));
+    const [formIndex, setFormIndex] = useState(1);
 
     const handleChange = (index, value) => {
         const newValues = [...values];
@@ -20,9 +18,19 @@ function ValuesPage() {
         setValues(newValues);
     };
 
-    const handleSubmit = () => {
-        setModalOpen(false);
-        window.location.replace('/')
+    const handleSubmit = async () => {
+        try {
+            const response = await ApiService.post('/values/postValues', {
+                test1: values.slice(0, 5),
+                test2: values.slice(5)
+            });
+            if (response.status === 201 || response.status === 200) {
+                setModalOpen(false);
+                window.location.replace('/');
+            }
+        } catch (error) {
+            console.error('Error submitting values:', error);
+        }
     };
 
     const closeModal = () => {
@@ -47,20 +55,28 @@ function ValuesPage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Send a POST request to your backend
-                await ApiService.post('test/postset', { test_value: 0 });
+                const response = await ApiService.get('/values/getValues');
+                if (response.status === 200) {
+                    const { values } = await response.json();
+                    setValues([...values.test1, ...values.test2]);
+                }
             } catch (error) {
-                console.error('Error sending POST request:', error);
+                console.error('Error fetching values:', error);
             }
         };
-
         fetchData();
-
-        // Cleanup function
-        return () => {
-            // Perform any cleanup if necessary
-        };
     }, []); 
+
+    const handleClearValues = async () => {
+        try {
+            const response = await ApiService.delete('/values/deleteValues');
+            if (response.status === 200) {
+                setValues(Array(10).fill(''));
+            }
+        } catch (error) {
+            console.error('Error clearing values:', error);
+        }
+    };
 
     return (
         <div className='centralize'>
@@ -118,6 +134,9 @@ function ValuesPage() {
                             Voltar
                         </button>
                     )}
+                    <button className="default-button" type="button" id="clear" onClick={handleClearValues}>
+                        Limpar Valores
+                    </button>
                 </form>
             </main>
         </div>
