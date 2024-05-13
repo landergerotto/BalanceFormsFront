@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTimer } from '../../context/timercontent';
 import { useNavigate } from 'react-router-dom';
 import NavbarComponent from '../../components/NavbarComponent/NavbarComponent';
-
 import ApiService from "../../services/requester/ApiService";
 
 function TimerPage() {
@@ -11,7 +10,19 @@ function TimerPage() {
 
     const [targetTime, setTargetTime] = useState(null);
     const [currentTime, setCurrentTime] = useState(new Date());
+    const [elapsedSeconds, setElapsedSeconds] = useState(0); // State to track elapsed seconds
     const navigate = useNavigate();
+
+    useEffect(() => {
+        ApiService.post('test/postset', { test_value: 1 })
+            .then(() => {
+                console.log('a')
+            })
+            .catch(error => {
+                console.error('Error sending POST request:', error);
+                // Handle error if necessary
+            });
+    }, []); // Update effect when minutes change
 
     useEffect(() => {
         const target = new Date(new Date().getTime() + parseInt(minutes) * 60000);
@@ -21,18 +32,17 @@ function TimerPage() {
         const intervalId = setInterval(() => {
             const now = new Date();
             setCurrentTime(now);
+            // Increment elapsed seconds every second
+            setElapsedSeconds(prevElapsedSeconds => prevElapsedSeconds + 1);
             if (now >= target) {
                 sessionStorage.removeItem('time');
                 clearInterval(intervalId);
                 handleFinishTest(); // Call handleFinishTest when timer reaches zero
-            } else {
-                    console.log('a')
-                    sendPostRequest();
             }
         }, 1000);
 
         return () => clearInterval(intervalId);
-    }, [minutes]);
+    }, [minutes]); // Update effect when minutes change
 
     const handleFinishTest = () => {
         // Perform any necessary actions upon timer reaching zero
@@ -41,31 +51,33 @@ function TimerPage() {
             setTimeout(() => {
                 sessionStorage.removeItem('time');
                 navigate("/final"); // Redirect to '/final' page upon test completion
-            }, 2000);
+            }, 5000);
         })
         .catch(error => {
-            console.error('lascou vei');
             console.error('Error sending POST request:', error);
+            // Handle error if necessary
         });
     };
 
     const submitTest = (e) => {
-        // Perform any necessary actions upon timer reaching zero
+        // Prevent default form submission
         e.preventDefault();
+        // Perform any necessary actions upon timer reaching zero
         ApiService.post('test/postset', { test_value: 2 })
         .then(response => {
             setTimeout(() => {
                 sessionStorage.removeItem('time');
                 navigate("/final"); // Redirect to '/final' page upon test completion
-            }, 2000);
+            }, 5000);
         })
         .catch(error => {
-            console.error('lascou vei');
             console.error('Error sending POST request:', error);
+            // Handle error if necessary
         });
     };
 
     const sendPostRequest = () => {
+        // Send POST request
         return ApiService.post('test/postset', { test_value: 1 });
     };
 
