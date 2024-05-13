@@ -6,7 +6,7 @@ import ApiService from "../../services/requester/ApiService";
 
 function TimerPage() {
     const { minutes: contextMinutes } = useTimer();
-    const minutes = contextMinutes || 1;
+    const minutes = contextMinutes || 30;
 
     const [targetTime, setTargetTime] = useState(null);
     const [currentTime, setCurrentTime] = useState(new Date());
