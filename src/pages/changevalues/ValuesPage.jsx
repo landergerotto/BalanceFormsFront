@@ -67,17 +67,6 @@ function ValuesPage() {
         fetchData();
     }, []); 
 
-    const handleClearValues = async () => {
-        try {
-            const response = await ApiService.delete('values/deleteValues');
-            if (response.status === 200) {
-                setValues(Array(10).fill(''));
-            }
-        } catch (error) {
-            console.error('Error clearing values:', error);
-        }
-    };
-
     return (
         <div className='centralize'>
             <NavbarComponent />
@@ -134,9 +123,6 @@ function ValuesPage() {
                             Voltar
                         </button>
                     )}
-                    <button className="default-button" type="button" id="clear" onClick={handleClearValues}>
-                        Limpar Valores
-                    </button>
                 </form>
             </main>
         </div>
