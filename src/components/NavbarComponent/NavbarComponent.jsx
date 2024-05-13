@@ -33,8 +33,6 @@ function NavbarComponent() {
     const worksheets = [worksheet1, worksheet2];
 
     var header = ["Nome", "Data de nascimento", "Respostas", "Tempo de prova", "Quantidade de peças utilizadas", "Tentativas", "% de acertos"];
-    var player = playersData[index];
-    var provas = [player.prova1, player.prova2];
     var current = 1;
 
     for (const [index, worksheet] of worksheets.entries()) {
@@ -54,54 +52,60 @@ function NavbarComponent() {
         cell.style = headerStyle;
         worksheet.mergeCells(cell.row, cell.row + 1, col, col);
       };
-      worksheet
-        .addRow(header)
-        .eachCell((cell, col) => {
-          cell.style = headerStyle;
-          worksheet.mergeCells(cell.row, cell.row + 1, col, col);
-        });
       
-      var data = [
-        player.nome,
-        player.nascimento,
-        provas[index].corretas[0],
-        provas[index].corretas[1],
-        provas[index].corretas[2],
-        provas[index].corretas[3],
-        provas[index].corretas[4],
-        provas[index].tempo,
-        provas[index].quantidade,
-        provas[index].tentativas,
-        provas[index].acertos
-      ];
-
-      var data2 = [
-        '',
-        '',
-        provas[index].respostas[0],
-        provas[index].respostas[1],
-        provas[index].respostas[2],
-        provas[index].respostas[3],
-        provas[index].respostas[4],
-        '',
-        '',
-        '',
-        ''
-      ]
-
-      worksheet.addRow(data).eachCell((cell, col) => {
-        if (col != 11)
-          cell.style = defaultStyle;
-        else
-          cell.style = percentageStyle;
+      playersData.forEach(player => {
+        var provas = [player.prova1, player.prova2];
+        
+        worksheet
+          .addRow(header)
+          .eachCell((cell, col) => {
+            cell.style = headerStyle;
+            worksheet.mergeCells(cell.row, cell.row + 1, col, col);
+          });
+        
+        var data = [
+          player.nome,
+          player.nascimento,
+          provas[index].corretas[0],
+          provas[index].corretas[1],
+          provas[index].corretas[2],
+          provas[index].corretas[3],
+          provas[index].corretas[4],
+          provas[index].tempo,
+          provas[index].quantidade,
+          provas[index].tentativas,
+          provas[index].acertos
+        ];
+  
+        var data2 = [
+          '',
+          '',
+          provas[index].respostas[0],
+          provas[index].respostas[1],
+          provas[index].respostas[2],
+          provas[index].respostas[3],
+          provas[index].respostas[4],
+          '',
+          '',
+          '',
+          ''
+        ]
+  
+        worksheet.addRow(data).eachCell((cell, col) => {
+          if (col != 11)
+            cell.style = defaultStyle;
+          else
+            cell.style = percentageStyle;
+        });
+  
+        worksheet.addRow(data2).eachCell((cell, col) => {
+          if (col > 2 && col < 8)
+            cell.style = verifyStyle(provas[index].respostas[col - 1], provas[index].corretas[col - 1]);
+          else
+            worksheet.mergeCells(cell.row, cell.row - 1, col, col);
+        });
       });
-
-      worksheet.addRow(data2).eachCell((cell, col) => {
-        if (col > 2 && col < 8)
-          cell.style = verifyStyle(provas[index].respostas[col - 1], provas[index].corretas[col - 1]);
-        else
-          worksheet.mergeCells(cell.row, cell.row - 1, col, col);
-      });
+      
     };
 
     // Save the workbook and provide a download link
