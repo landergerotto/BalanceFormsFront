@@ -20,7 +20,7 @@ function ValuesPage() {
 
     const handleSubmit = async () => {
         try {
-            const response = await ApiService.post('/values/postValues', {
+            const response = await ApiService.post('values/postValues', {
                 test1: values.slice(0, 5),
                 test2: values.slice(5)
             });
@@ -55,7 +55,7 @@ function ValuesPage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await ApiService.get('/values/getValues');
+                const response = await ApiService.get('values/getValues');
                 if (response.status === 200) {
                     const { values } = await response.json();
                     setValues([...values.test1, ...values.test2]);
@@ -69,7 +69,7 @@ function ValuesPage() {
 
     const handleClearValues = async () => {
         try {
-            const response = await ApiService.delete('/values/deleteValues');
+            const response = await ApiService.delete('values/deleteValues');
             if (response.status === 200) {
                 setValues(Array(10).fill(''));
             }
