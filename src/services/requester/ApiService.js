@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // ta assim pq eu n consegui upar ;--;
 // mas era pra ser um link do vercel
-const baseURL = 'http://localhost:8080'; // Replace this with your API's base URL
+const baseURL = 'https://balance-forms-back.vercel.app'; // Replace this with your API's base URL
 
 const ApiService = {
   // Function to make a GET request

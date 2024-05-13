@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavbarComponent from '../../components/NavbarComponent/NavbarComponent';
 import { useTimer } from '../../context/timercontent';
-
-import '../../index.css'
+import ApiService from "../../services/requester/ApiService";
+import '../../index.css';
 
 function TimerForm() {
     const [errorMessage, setErrorMessage] = useState('');
@@ -30,10 +30,27 @@ function TimerForm() {
         e.preventDefault();
         // Handle form submission
         if (errorMessage === '') {
-            navigate('/timer',)
-            console.log(minutes)
+            navigate('/timer');
         }
     };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // Send a POST request to your backend
+                await ApiService.post('test/postset', { test_value: 0 });
+            } catch (error) {
+                console.error('Error sending POST request:', error);
+            }
+        };
+
+        fetchData();
+
+        // Cleanup function
+        return () => {
+            // Perform any cleanup if necessary
+        };
+    }, []); 
 
     return (
         <div className='centralize'>
@@ -53,7 +70,7 @@ function TimerForm() {
                         />
                         <div className="error">{errorMessage}</div>
                     </div>
-                    <button className="default-button" onClick={(e) => handleSubmit(e)} type="submit" disabled={errorMessage !== ''}>Iniciar prova</button>
+                    <button className="default-button" type="submit" disabled={errorMessage !== ''}>Iniciar prova</button>
                 </form>
             </main>
         </div>

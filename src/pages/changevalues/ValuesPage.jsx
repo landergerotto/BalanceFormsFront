@@ -1,5 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavbarComponent from '../../components/NavbarComponent/NavbarComponent';
+
+import ApiService from "../../services/requester/ApiService";
+
 
 const defaultValues = [
     1000, 750, 500, 200, 100,
@@ -40,6 +43,24 @@ function ValuesPage() {
     const handlePrevForm = () => {
         setFormIndex(1);
     };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // Send a POST request to your backend
+                await ApiService.post('test/postset', { test_value: 0 });
+            } catch (error) {
+                console.error('Error sending POST request:', error);
+            }
+        };
+
+        fetchData();
+
+        // Cleanup function
+        return () => {
+            // Perform any cleanup if necessary
+        };
+    }, []); 
 
     return (
         <div className='centralize'>
