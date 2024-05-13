@@ -47,7 +47,7 @@ function TimerPage() {
     }
 
     return (
-        <>
+        <div className='centralize'>
             <NavbarComponent />
             <main>
                 <form onSubmit={(e) => submitTest(e)} id="form"> {/* Prevent default form submission */}
@@ -58,7 +58,7 @@ function TimerPage() {
                     </button>
                 </form>
             </main>
-        </>
+        </div>
     );
 }
 

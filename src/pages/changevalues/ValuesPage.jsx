@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import NavbarComponent from '../../components/NavbarComponent/NavbarComponent';
 
 const defaultValues = [
@@ -18,8 +18,8 @@ function ValuesPage() {
     };
 
     const handleSubmit = () => {
-        // Handle form submission
         setModalOpen(false);
+        window.location.replace('/')
     };
 
     const closeModal = () => {
@@ -42,7 +42,7 @@ function ValuesPage() {
     };
 
     return (
-        <>
+        <div className='centralize'>
             <NavbarComponent />
             <div id="modal" style={{ display: modalOpen ? 'flex' : 'none' }}>
                 <main>
@@ -99,7 +99,7 @@ function ValuesPage() {
                     )}
                 </form>
             </main>
-        </>
+        </div>
     );
 }
 

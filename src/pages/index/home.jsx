@@ -36,7 +36,7 @@ function TimerForm() {
     };
 
     return (
-        <>
+        <div className='centralize'>
             <NavbarComponent /> 
             <main>
                 <form onSubmit={handleSubmit}>
@@ -56,7 +56,7 @@ function TimerForm() {
                     <button className="default-button" onClick={(e) => handleSubmit(e)} type="submit" disabled={errorMessage !== ''}>Iniciar prova</button>
                 </form>
             </main>
-        </>
+        </div>
     );
 }
 

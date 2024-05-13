@@ -1,6 +1,4 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import NavbarComponent from "./components/NavbarComponent/NavbarComponent";
 import { Route, Routes } from "react-router-dom";
 import { TimerProvider } from "./context/timercontent";

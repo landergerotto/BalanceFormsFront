@@ -11,7 +11,7 @@ function FinishedPage() {
     };
 
     return (
-        <>
+        <div className='centralize'>
             <NavbarComponent />
             <main>
                 <form onSubmit={handleSubmit}>
@@ -19,7 +19,7 @@ function FinishedPage() {
                     <button className="default-button" type="submit" id="button">Página inicial</button>
                 </form>
             </main>
-        </>
+        </div>
     );
 }
 

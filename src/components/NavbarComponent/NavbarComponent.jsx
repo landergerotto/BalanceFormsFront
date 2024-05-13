@@ -181,18 +181,25 @@ function NavbarComponent() {
         console.error("Error generating Excel file:", error);
       });
   };
-
+  console.log()
   return (
     <header>
       <img src={navcolors} className="nav-colors" alt="Nav Colors" />
       <nav>
         <img src={logobosch} className="logo" alt="Bosch Logo" />
-        <button onClick={fetchData} className="nav-button">
-          Download Excel
-        </button>
-        <Link to="/change_values" className="nav-button">
-          Trocar valores
-        </Link>
+        <div>
+          {
+            window.location.pathname == '/' &&
+            <button onClick={fetchData} className="nav-button">
+              Download Excel
+            </button>
+          }
+          {
+            window.location.pathname == '/' ? 
+              <Link to="/change_values" className="nav-button">Trocar valores</Link> : 
+              <Link to="/" className="nav-button">Início</Link>
+          }
+        </div>  
       </nav>
     </header>
   );
