@@ -24,10 +24,10 @@ function ValuesPage() {
                 test1: values.slice(0, 5),
                 test2: values.slice(5)
             });
-            if (response.status === 201 || response.status === 200) {
+            console.log(response)
                 setModalOpen(false);
                 window.location.replace('/');
-            }
+            
         } catch (error) {
             console.error('Error submitting values:', error);
         }
