@@ -32,25 +32,35 @@ function NavbarComponent() {
     const worksheet2 = workbook.addWorksheet("Prova 2");
     const worksheets = [worksheet1, worksheet2];
 
+    var header = ["Nome", "Data de nascimento", "Respostas", "Tempo de prova", "Quantidade de peças utilizadas", "Tentativas", "% de acertos"];
     var player = playersData[index];
     var provas = [player.prova1, player.prova2];
+    var current = 1;
 
     for (const [index, worksheet] of worksheets.entries()) {
+      for (var i = 0; i < header.length; i++) {
+        var cell = worksheet.getCell(`A${current}`);
+        
+        if (current == 3) {
+          cell.value = header[i];
+          cell.style = headerStyle;
+          worksheet.mergeCells(cell.row, cell.row + 4, col, col);
+          continue;
+        }
+        if (current > 2 && current < 8)
+          continue;
+
+        cell.value = header[i];
+        cell.style = headerStyle;
+        worksheet.mergeCells(cell.row, cell.row + 1, col, col);
+      };
       worksheet
-        .addRow([
-          "Nome",
-          "Data de nascimento",
-          "Respostas",
-          "Tempo de prova",
-          "Quantidade de peças utilizadas",
-          "Tentativas",
-          "% de acertos",
-        ])
+        .addRow(header)
         .eachCell((cell, col) => {
           cell.style = headerStyle;
           worksheet.mergeCells(cell.row, cell.row + 1, col, col);
         });
-
+      
       var data = [
         player.nome,
         player.nascimento,
