@@ -45,12 +45,15 @@ function NavbarComponent() {
           worksheet.mergeCells(cell.row, cell.row + 4, cell.col, cell.col);
           continue;
         }
-        if (current > 2 && current < 8)
+        if (current > 2 && current < 8) {
+          current++;
           continue;
+        }
 
         cell.value = header[i];
         cell.style = headerStyle;
         worksheet.mergeCells(cell.row, cell.row + 1, cell.col, cell.col);
+        current++;
       };
       
       playersData.forEach(player => {
