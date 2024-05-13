@@ -14,7 +14,7 @@ import "../../index.css";
 function NavbarComponent() {
   const fetchData = async () => {
     try {
-      const playersData = await ApiService.get("player");
+      const playersData = await ApiService.get("player/getPlayer");
       generateExcel(playersData.players);
       // console.log(playersData.players)
     } catch (error) {
