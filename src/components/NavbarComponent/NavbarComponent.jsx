@@ -38,15 +38,13 @@ function NavbarComponent() {
     for (const [index, worksheet] of worksheets.entries()) {
       for (var i = 0; i < header.length; i++) {
         var cell = worksheet.getCell(`A${current}`);
-        
+        current++;
         if (current == 3) {
           cell.value = header[i];
           cell.style = headerStyle;
           worksheet.mergeCells(cell.row, cell.row + 4, cell.col, cell.col);
           continue;
         }
-
-        current++;
         if (current > 2 && current < 8)
           continue;
 
