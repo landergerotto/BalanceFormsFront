@@ -42,7 +42,7 @@ function NavbarComponent() {
         if (current == 3) {
           cell.value = header[i];
           cell.style = headerStyle;
-          worksheet.mergeCells(cell.row, cell.row + 4, col, col);
+          worksheet.mergeCells(cell.row, cell.row + 4, cell.col, cell.col);
           continue;
         }
         if (current > 2 && current < 8)
@@ -50,12 +50,12 @@ function NavbarComponent() {
 
         cell.value = header[i];
         cell.style = headerStyle;
-        worksheet.mergeCells(cell.row, cell.row + 1, col, col);
+        worksheet.mergeCells(cell.row, cell.row + 1, cell.col, cell.col);
       };
       
       playersData.forEach(player => {
         var provas = [player.prova1, player.prova2];
-        
+
         worksheet
           .addRow(header)
           .eachCell((cell, col) => {
